@@ -3,13 +3,13 @@
     --bg-color: #050505;
     --text-primary: #ededed;
     --text-secondary: #a1a1aa;
-    --accent-color: #d4af37;
-    /* Very subtle gold accent for premium feel */
-    --accent-hover: #b5952f;
+    --accent-color: #7b92a8;
+    /* Muted steel blue — professional, non-distracting */
+    --accent-hover: #96afc4;
     --glass-bg: rgba(20, 20, 20, 0.6);
     --glass-border: rgba(40, 40, 40, 0.6);
     --card-hover: rgba(25, 25, 25, 0.9);
-    --nav-h: 80px;
+    --nav-h: 64px;
 }
 
 [data-theme="light"] {
@@ -70,8 +70,7 @@ img {
 
 /* Utils */
 .section {
-    padding: 100px 0;
-    min-height: 100vh;
+    padding: 80px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -85,7 +84,7 @@ img {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 3rem;
     position: relative;
     display: inline-block;
@@ -249,7 +248,7 @@ img {
 .nav-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
 }
 
 .icon-btn {
@@ -277,35 +276,49 @@ img {
 
 .mobile-menu-btn {
     display: flex;
+    margin-left: 4px;
+    border-left: 1px solid var(--glass-border);
+    padding-left: 8px;
+    border-radius: 0;
 }
 
 .mobile-menu {
     position: fixed;
-    top: -100%;
+    top: var(--nav-h);
     left: 0;
     width: 100%;
     background: var(--glass-bg);
     border-bottom: 1px solid var(--glass-border);
-    padding: calc(var(--nav-h) + 20px) 20px 30px;
+    padding: 20px 20px 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 999;
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
+    transform: translateY(-110%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
 }
 
 .mobile-menu.open {
-    top: 0;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .mobile-link {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
     border-bottom: 1px solid var(--glass-border);
-    padding-bottom: 10px;
+    padding-bottom: 16px;
 }
+
+.mobile-link:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
 
 /* Animations */
 .reveal-up {
@@ -323,7 +336,8 @@ img {
 .hero {
     position: relative;
     overflow: hidden;
-    padding-top: 120px;
+    min-height: 100vh;
+    padding-top: calc(var(--nav-h) + 40px);
 }
 
 .hero-bg-shapes {
@@ -398,7 +412,7 @@ img {
 .card-icon {
     width: 50px;
     height: 50px;
-    background: rgba(212, 175, 55, 0.1);
+    background: var(--glass-border);
     color: var(--accent-color);
     border-radius: 12px;
     display: flex;
@@ -616,7 +630,7 @@ img {
 .method-icon {
     width: 45px;
     height: 45px;
-    background: rgba(88, 166, 255, 0.1);
+    background: var(--glass-border);
     color: var(--accent-color);
     border-radius: 50%;
     display: flex;

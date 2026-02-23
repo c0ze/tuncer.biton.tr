@@ -5,26 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
-    const themeIcon = themeToggle.querySelector('i');
+    const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
 
     // Check saved theme
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
-    themeToggle.addEventListener('click', () => {
+    function toggleThemeAction() {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
-    });
+    }
+
+    if (themeToggle) themeToggle.addEventListener('click', toggleThemeAction);
 
     function updateThemeIcon(theme) {
-        if (themeIcon) {
-            themeIcon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
-            lucide.createIcons(); // re-init icon
-        }
+        if (themeIcon) themeIcon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+        lucide.createIcons();
     }
 
     // Mobile Menu Toggle
